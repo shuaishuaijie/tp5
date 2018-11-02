@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="创新中心学分管理系统">
+        <meta name="keywords" content="左右结构 学分 ">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>创新中心后台管理系统</title>
+        <script src="__STATIC__/js/jquery.min.js"></script>
+        <script src="__STATIC__/js/bootstrap.min.js"></script>
+        <script src="__STATIC__/js/main.js"></script>
+        <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="__STATIC__/css/common.css" />
+        <link rel="stylesheet" type="text/css" href="__STATIC__/css/slide.css" />
+        <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="__STATIC__/css/flat-ui.min.css" />
+        <link rel="stylesheet" type="text/css" href="__STATIC__/css/jquery.nouislider.css">
+    </head>
+</head>
+<body>
+{for start="10" end="0" comparison="gt" step="-1"}
+    {$i}
+{/for}
+<!--用户管理模块-->
+<div role="tabpanel" class="tab-pane" id="user">
+    <div class="check-div form-inline">
+        <div class="col-xs-3">
+            <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addUser">添加用户 </button>
+        </div>
+        <div class="col-xs-4">
+            <input type="text" class="form-control input-sm" placeholder="输入文字搜索">
+            <button class="btn btn-white btn-xs ">查 询 </button>
+        </div>
+        <div class="col-lg-3 col-lg-offset-2 col-xs-4" style=" padding-right: 40px;text-align: right;">
+            <label for="paixu">排序:&nbsp;</label>
+            <select class=" form-control">
+                <option>地区</option>
+                <option>地区</option>
+                <option>班期</option>
+                <option>性别</option>
+                <option>年龄</option>
+                <option>份数</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="data-div">
+        <div class="row tableHeader">
+            <div class="col-xs-2 ">
+                用户名
+            </div>
+            <div class="col-xs-2">
+                地区
+            </div>
+            <div class="col-xs-2">
+                真实姓名
+            </div>
+            <div class="col-xs-2">
+                电话
+            </div>
+            <div class="col-xs-2">
+                状态
+            </div>
+            <div class="col-xs-2">
+                操作
+            </div>
+        </div>
+
+        <div class="tablebody">
+            {volist name="data" id="value"}
+            <div class="row">
+                <div class="col-xs-2 ">
+                    {$value.aid}
+                </div>
+                <div class="col-xs-2">
+                    {$value.rid}
+                </div>
+                <div class="col-xs-2">
+                    {$value.did}
+                </div>
+                <div class="col-xs-2">
+                    {$value.status}
+                </div>
+                <div class="col-xs-2">
+                    {$value.type}
+                </div>
+                <div class="col-xs-2">
+                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviseUser">修改</button>
+                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteUser">删除</button>
+                </div>
+            </div>
+            {/volist}
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
