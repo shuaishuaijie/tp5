@@ -5,6 +5,7 @@ class Index
 {
     public function index()
     {
-       echo "这是后台模块";
+        //加载页面
+       return view();
     }
 }
