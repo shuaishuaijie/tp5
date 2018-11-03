@@ -14,6 +14,6 @@ class Index extends Controller
     {
 //        //加载页面
 //        return $this->fetch();
-        echo "hello";
+        echo "这是前台模块";
     }
 }
