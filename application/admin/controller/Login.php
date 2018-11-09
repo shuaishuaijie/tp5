@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: pc
+ * manager: pc
  * Date: 2018/11/4
  * Time: 20:58
  */
@@ -31,7 +31,7 @@ class Login extends Controller {
      */
     protected function logincheck($data){
         //场景验证
-        $validate=validate('Manager');
+        $validate=validate('manager');
         if(!$validate->scene('login')->check($data)){
             $this->error($validate->getError());
         }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: pc
+ * manager: pc
  * Date: 2018/10/13
  * Time: 18:52
  * 空控制器 空方法  对用户友好
