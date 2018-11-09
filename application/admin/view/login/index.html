@@ -15,30 +15,18 @@
 <div id="login-page">
   <div class="container">
 
-    <form class="form-login" action="{:url('check')}" method="post" id="loginForm">
+    <form class="form-login" action="" method="post" id="loginForm">
       <h2 class="form-login-heading">创新中心后台登录系统</h2>
       <div class="login-wrap" style="position: relative">
-        <input type="text" class="form-control" name="username" id="username" value="admin" placeholder="用户帐号。。。">
+        <input type="text" class="form-control" name="aid" id="aid" value="admin" placeholder="用户帐号。。。">
         <br>
         <input type="password" class="form-control" name="password" id="password" value="12345678"  placeholder="用户密码。。。">
-          <input type="text" class="form-control" name="username" id="code" placeholder="请输入验证码" style="width: 120px; margin-top: 20px;">
-          <img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}?'+Math.random();" style="float: left"/>
+          <input type="text" class="form-control" name="code" id="code" placeholder="请输入验证码" style="width: 120px; margin-top: 20px;">
 
-        <label class="checkbox">
-		                <span class="pull-right">
-		                    <a data-toggle="modal" href="login.html#myModal"> 忘 记 密 码 ?</a>
-		                </span>
-        </label>
-         <!-- <div class="layui-form-item">
-                <label class="layui-form-label">验证码</label>
-                <div class="layui-input-inline">
-                    <input style="width:80px;float:left" type="text" name="captcha" class="layui-input"/>
-                    <img id="captcha" style="width:100px;height:40px;display: inline-block;float:right;"
-                         src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}'"/>
-                </div>
-          </div> -->
+        <div class="code">
+          <img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}?'+Math.random();" >
+        </div>
         <input class="btn btn-theme btn-block" type="submit" value="登录"/>
-
       </div>
     </form>
   </div>
