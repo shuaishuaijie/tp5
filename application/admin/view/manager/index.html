@@ -1,0 +1,86 @@
+{layout name="layout" /}
+<div class="header">
+    <div class="stats">
+        <p class="stat"><span class="number">53</span>tickets</p>
+        <p class="stat"><span class="number">27</span>tasks</p>
+        <p class="stat"><span class="number">15</span>waiting</p>
+    </div>
+
+    <h1 class="page-title">管理员列表</h1>
+</div>
+
+<ul class="breadcrumb">
+    <li><a href="{:url('manager/index')}">权限管理</a> <span class="divider">/</span></li>
+    <li class="active">管理员列表</li>
+</ul>
+<div class="container-fluid">
+    <div class="row-fluid">
+                    
+        <div class="btn-toolbar">
+            <a href="{:url('manager/add')}" class="btn btn-primary"><i class="icon-plus"></i> New User</a>
+            <button class="btn">Import</button>
+            <button class="btn">Export</button>
+        <div class="btn-group">
+  </div>
+</div>
+<div class="well">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>账号</th>
+          <th>状态</th>
+          <th>操作</th>
+            <th>状态操作</th>
+          <th style="width: 26px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+      {volist name="manager" id="vo"}
+        <tr>
+          <td>{$vo.id}</td>
+          <td>{$vo.aid}</td>
+          <td>{$vo.status?"锁定":"正常"}</td>
+          <td>
+              <a href="{:url('manager/edit',['id'=>$vo.id])}"><i class="icon-pencil"></i></a>
+              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+          </td>
+            <td><a class="btn btn-warning" href="{:url('manager/status',['id'=>$vo.id])}">{$vo.status?"解锁":"锁定"}</a></td>
+        </tr>
+      {/volist}
+      </tbody>
+    </table>
+</div>
+
+<div class="pagination" >
+    <div style="bottom: 100px;">{$manager->render()}</div>
+</div>
+
+<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Delete Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the user?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+    </div>
+</div>
+    
+
+
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript">
+        $("[rel=tooltip]").tooltip();
+        $(function() {
+            $('.demo-cancel-click').click(function(){return false;});
+        });
+    </script>
+    
+  </body>
+</html>
+
+

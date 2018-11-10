@@ -18,9 +18,9 @@ class Login extends Controller {
         {
             //接收数据
             $data=input('post.');
-            $result=$this->logincheck($data);
+            $this->logincheck($data);
         }
-        if(session('loginname','','admin')){
+        if(session('loginname','','admin')&&session('loginid','','admin')){
             $this->redirect('index/index');
         }
         //加载页面
@@ -45,12 +45,13 @@ class Login extends Controller {
             $this->error('密码输入错误');
         }
         //验证状态
-        if(!$res['status']){
+        if($res['status']){
             $this->error('此账号已锁定请联系系统管理员');
         }
         //保存session(作用域为后台)
         session('loginname',$res['aid'],'admin');
         //这里保存id
+        session('loginid',$res['id'],'admin');
         $this->success('登录成功','index/index');
 
     }
