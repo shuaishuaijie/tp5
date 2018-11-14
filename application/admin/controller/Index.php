@@ -32,6 +32,7 @@ class Index extends Commom
                 // 数据库名称
                 'database'=>config('database')['database'],
             ];
+
         //分配数据
         $this->assign('system',$system);
         return view();

@@ -1,0 +1,34 @@
+{layout name="layout" /}
+<div class="header">
+    <div class="stats">
+        <p class="stat"><span class="number">53</span>tickets</p>
+        <p class="stat"><span class="number">27</span>tasks</p>
+        <p class="stat"><span class="number">15</span>waiting</p>
+    </div>
+
+    <h1 class="page-title">登录日志</h1>
+</div>
+<ul class="breadcrumb">
+    <li><a href="{:url('manager/index')}">权限管理</a> <span class="divider">/</span></li>
+    <li class="active">登录日志</li>
+</ul>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <h2>日志信息</h2>
+        <table class="table table-bordered table-responsive table-striped table-hover">
+            <tr>
+                <td style="background: #c7254e">登录时间</td>
+                <td style="background: #269abc">登录IP</td>
+                <td style="background: #7a43b6">登录信息</td>
+            </tr>
+            {volist name="log" id="vo"}
+            <tr>
+                <td >{$vo.logintime|date="Y/m/d H:i:s",###}</td>
+                <td >{$vo.ip}</td>
+                <td >{$vo.loginmsg}</td>
+            </tr>
+            {/volist}
+        </table>
+    </div>
+</div>
+

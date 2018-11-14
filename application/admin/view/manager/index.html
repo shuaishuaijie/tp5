@@ -66,21 +66,17 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+        <a href="{:url('manager/del',['id'=>$vo.id])}" class="btn btn-danger" >Delete</a>
     </div>
 </div>
-    
-
-
     <script src="lib/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript">
-        $("[rel=tooltip]").tooltip();
-        $(function() {
-            $('.demo-cancel-click').click(function(){return false;});
-        });
+        // $(function() {
+        //     $('.demo-cancel-click').click(function(){
+        //        var url=$(this).attr('href');
+        //        alert(url);
+        //     });
+        // });
     </script>
-    
-  </body>
-</html>
-
-
+    </div>
+</div>

@@ -82,4 +82,21 @@ class Manager extends Commom {
             $this->error("更新失败","manager/index");
         }
     }
+    //管理员删除
+    public function del($id){
+        $res=db('admin')->where('id',$id)->delete();
+        if($res){
+            $this->success("删除成功","manager/index");
+        }else{
+            $this->error("删除失败","manager/index");
+        }
+    }
+    //管理员登录日志
+    public function  log(){
+        //获取登录日志
+        $log=db('loginlog')->order('logintime desc')->where('uid',session('loginid','','admin'))->limit(10)->select();
+        $this->assign('log',$log);
+        //加载页面
+        return view();
+    }
 }
