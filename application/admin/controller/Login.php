@@ -83,7 +83,7 @@ class Login extends Controller {
             return ['code'=>0,'msg'=>'此账号已锁定请联系系统管理员','uid'=>$res['id']];
         }
         //保存session(作用域为后台)
-        session('loginname',$res['aid'],'admin');
+        session('loginname',$res['name'],'admin');
         //这里保存id
         session('loginid',$res['id'],'admin');
 //        $this->success('登录成功','index/index');

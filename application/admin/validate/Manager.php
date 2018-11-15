@@ -30,7 +30,8 @@ class Manager extends Validate
 
     ];
     protected $scene = [
-        'edit'=>['password'=>'require|min:6|confirm:repassword'],
+        'add'=>['aid','password'],
+        'edit'=>['password'],
         'login'=>['aid'=>'require|min:4','password'=>'require|min:6','code'=>'require|captcha'],
     ];
 }

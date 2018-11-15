@@ -22,7 +22,7 @@ class Manager extends Commom {
         if(request()->isPost()){
             $data=input("post.");
             $validate=validate('Manager');
-            if(!$validate->check($data)){
+            if(!$validate->scene('add')->check($data)){
                 $this->error($validate->getError());
             }
             //验证通过，数据写入数据库
@@ -97,6 +97,30 @@ class Manager extends Commom {
         $log=db('loginlog')->order('logintime desc')->where('uid',session('loginid','','admin'))->limit(10)->select();
         $this->assign('log',$log);
         //加载页面
+        return view();
+    }
+    //修改密码
+    public function setpassword(){
+        if(request()->isPost()){
+            $data=input('post.');
+            $validate=validate('manager');//实例化验证器
+            //场景验证
+            if(!$validate->scene('edit')->check($data)){
+                $this->error($validate->getError());
+            }
+            //查询数据库密码
+            $res=db('admin')->field('password')->find(session('loginid','','admin'));
+            if(md5($data['oldpassword'])!=$res['password']){
+                $this->error("旧密码输入错误");
+            }
+            $result=db('admin')->where('id',session('loginid','','admin'))->setField('password',md5($data['password']));
+            if($result){
+                $this->success('密码更新成功');
+            }else{
+                $this->error('密码更新失败');
+            }
+            return;
+        }
         return view();
     }
 }

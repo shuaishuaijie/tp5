@@ -24,7 +24,7 @@ class Commom extends Controller
                 $this->redirect('login/index');
             }
             $this->error('未登录不允许访问','login/index');
-
         }
+        $this->assign('admin',session('loginname','','admin'));
     }
 }
