@@ -9,8 +9,12 @@
 namespace app\index\controller;
 
 
-class Login{
-    public function index(){
-        return view();
+use think\Controller;
+
+class Login extends Controller
+{
+    public function index()
+    {
+       return $this->fetch();
     }
 }

@@ -1,554 +1,267 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>登录</title>
-<link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" href="css/login.css">
-<link rel="stylesheet" href="css/sign-up-login.css">
-<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-<link rel="stylesheet" href="css/inputEffect.css" />
-<link rel="stylesheet" href="css/verifyCode.css" />
-<link rel="stylesheet" href="css/tooltips.css" />
-<link rel="stylesheet" href="css/spop.min.css" />
-
-<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-<script src="js/snow.js"></script>
-<script src="js/jquery.pure.tooltips.js"></script>
-<script src="js/verifyCode.js"></script>
-<script src="js/spop.min.js"></script>
-<script>	
-	(function() {
-		// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
-		if (!String.prototype.trim) {
-			(function() {
-				// Make sure we trim BOM and NBSP
-				var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-				String.prototype.trim = function() {
-					return this.replace(rtrim, '');
-				};
-			})();
-		}
-
-		[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
-			// in case the input is already filled..
-			if( inputEl.value.trim() !== '' ) {
-				classie.add( inputEl.parentNode, 'input--filled' );
-			}
-
-			// events:
-			inputEl.addEventListener( 'focus', onInputFocus );
-			inputEl.addEventListener( 'blur', onInputBlur );
-		} );
-
-		function onInputFocus( ev ) {
-			classie.add( ev.target.parentNode, 'input--filled' );
-		}
-
-		function onInputBlur( ev ) {
-			if( ev.target.value.trim() === '' ) {
-				classie.remove( ev.target.parentNode, 'input--filled' );
-			}
-		}
-	})();
-	
-	$(function() {	
-		$('#login #login-password').focus(function() {
-			$('.login-owl').addClass('password');
-		}).blur(function() {
-			$('.login-owl').removeClass('password');
-		});
-		$('#login #register-password').focus(function() {
-			$('.register-owl').addClass('password');
-		}).blur(function() {
-			$('.register-owl').removeClass('password');
-		});
-		$('#login #register-repassword').focus(function() {
-			$('.register-owl').addClass('password');
-		}).blur(function() {
-			$('.register-owl').removeClass('password');
-		});
-		$('#login #forget-password').focus(function() {
-			$('.forget-owl').addClass('password');
-		}).blur(function() {
-			$('.forget-owl').removeClass('password');
-		});
-	});
-	
-	function goto_register(){
-		$("#register-username").val("");
-		$("#register-password").val("");
-		$("#register-repassword").val("");
-		$("#register-code").val("");
-		$("#tab-2").prop("checked",true);
-	}
-	
-	function goto_login(){
-		$("#login-username").val("");
-		$("#login-password").val("");
-		$("#tab-1").prop("checked",true);
-	}
-	
-	function goto_forget(){
-		$("#forget-username").val("");
-		$("#forget-password").val("");
-		$("#forget-code").val("");
-		$("#tab-3").prop("checked",true);
-	}
-	
-	function login(){//登录
-		var username = $("#login-username").val(),
-			password = $("#login-password").val(),
-			verifycode = $("#login-verify-code").val(),
-			validatecode = null;
-		//判断用户名密码是否为空
-		if(username == ""){
-			$.pt({
-        		target: $("#login-username"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"用户名不能为空"
-        	});
-			return;
-		}
-		if(password == ""){
-			$.pt({
-        		target: $("#login-password"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"密码不能为空"
-        	});
-			return;
-		}
-		if(verifycode == ""){
-			$.pt({
-        		target: $("#login-verify-code-canvas"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"验证码不能为空"
-        	});
-			return;
-		}		
-		if(timeout_flag){
-			$.pt({
-        		target: $("#login-verify-code-canvas"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"验证码已经失效"
-        	});
-			return;
-		}
-		//用户名只能是15位以下的字母或数字
-		var regExp = new RegExp("^[a-zA-Z0-9_]{1,15}$");
-		if(!regExp.test(username)){
-			$.pt({
-        		target: $("#login-username"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"用户名必须为15位以下的字母或数字"
-        	});
-			return;
-		}
-		//判断验证码是否正确
-		if(verifycode != show_num.join("")){
-			$.pt({
-        		target: $("#login-verify-code-canvas"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"验证码不正确"
-        	});
-			return;
-		}
-		
-		//登录
-		//调用后台登录验证的方法
-		alert('登录成功');
-		return false;
-	}
-	
-	//注册
-	function register(){
-		var username = $("#register-username").val(),
-			password = $("#register-password").val(),
-			repassword = $("#register-repassword").val(),
-			code = $("#register-code").val(),
-			flag = false,
-			validatecode = null;
-		//判断用户名密码是否为空
-		if(username == ""){
-			$.pt({
-        		target: $("#register-username"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"用户名不能为空"
-        	});
-			flag = true;
-		}
-		if(password == ""){
-			$.pt({
-        		target: $("#register-password"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"密码不能为空"
-        	});
-			flag = true;
-		}else{
-			if(password != repassword){
-				$.pt({
-	        		target: $("#register-repassword"),
-	        		position: 'r',
-	        		align: 't',
-	        		width: 'auto',
-	        		height: 'auto',
-	        		content:"两次输入的密码不一致"
-	        	});
-				flag = true;
-			}
-		}
-		//用户名只能是15位以下的字母或数字
-		var regExp = new RegExp("^[a-zA-Z0-9_]{1,15}$");
-		if(!regExp.test(username)){
-			$.pt({
-        		target: $("#register-username"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"用户名必须为15位以下的字母或数字"
-        	});
-			flag = true;
-		}
-		//检查用户名是否已经存在
-		//调后台代码检查用户名是否已经被注册
-		
-		//检查注册码是否正确
-		//调后台方法检查注册码，这里写死为11111111
-		if(code != '11111111'){
-			$.pt({
-		        target: $("#register-code"),
-		        position: 'r',
-		        align: 't',
-		        width: 'auto',
-		        height: 'auto',
-		        content:"注册码不正确"
-		       });
-			flag = true;
-		}
-		
-		
-		if(flag){
-			return false;
-		}else{//注册
-			spop({			
-				template: '<h4 class="spop-title">注册成功</h4>即将于3秒后返回登录',
-				position: 'top-center',
-				style: 'success',
-				autoclose: 3000,
-				onOpen : function(){
-					var second = 2;
-					var showPop = setInterval(function(){
-						if(second == 0){
-							clearInterval(showPop);
-						}
-						$('.spop-body').html('<h4 class="spop-title">注册成功</h4>即将于'+second+'秒后返回登录');
-						second--;
-					},1000);
-				},
-				onClose : function(){
-					goto_login();
-				}
-			});
-			return false;
-		}
-	}
-	
-	//重置密码
-	function forget(){
-		var username = $("#forget-username").val(),
-			password = $("#forget-password").val(),
-			code = $("#forget-code").val(),
-			flag = false,
-			validatecode = null;
-		//判断用户名密码是否为空
-		if(username == ""){
-			$.pt({
-        		target: $("#forget-username"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"用户名不能为空"
-        	});
-			flag = true;
-		}
-		if(password == ""){
-			$.pt({
-        		target: $("#forget-password"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"密码不能为空"
-        	});
-			flag = true;
-		}
-		//用户名只能是15位以下的字母或数字
-		var regExp = new RegExp("^[a-zA-Z0-9_]{1,15}$");
-		if(!regExp.test(username)){
-			$.pt({
-        		target: $("#forget-username"),
-        		position: 'r',
-        		align: 't',
-        		width: 'auto',
-        		height: 'auto',
-        		content:"用户名必须为15位以下的字母或数字"
-        	});
-			flag = true;
-		}
-		//检查用户名是否存在
-		//调后台方法
-		
-		//检查注册码是否正确
-		if(code != '11111111'){
-			$.pt({
-		        target: $("#forget-code"),
-		        position: 'r',
-		        align: 't',
-		        width: 'auto',
-		        height: 'auto',
-		        content:"注册码不正确"
-		       });
-			flag = true;
-		}
-		
-		
-		
-		if(flag){
-			return false;
-		}else{//重置密码
-			spop({			
-				template: '<h4 class="spop-title">重置密码成功</h4>即将于3秒后返回登录',
-				position: 'top-center',
-				style: 'success',
-				autoclose: 3000,
-				onOpen : function(){
-					var second = 2;
-					var showPop = setInterval(function(){
-						if(second == 0){
-							clearInterval(showPop);
-						}
-						$('.spop-body').html('<h4 class="spop-title">重置密码成功</h4>即将于'+second+'秒后返回登录');
-						second--;
-						},1000);
-				},
-				onClose : function(){
-					goto_login();
-				}
-			});
-			return false;
-		}
-	}
-	
-	
-	
-	
-	
-	
-	
-</script>
-<style type="text/css">
-html{width: 100%; height: 100%;}
-
-body{
-
-	background-repeat: no-repeat;
-
-	background-position: center center #2D0F0F;
-
-	background-color: #00BDDC;
-
-	background-image: url(images/snow.jpg);
-
-	background-size: 100% 100%;
-
-}
-
-.snow-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100001; }
-
-</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>登录界面</title>
+    <link href="__INDEX__/css/default.css" rel="stylesheet" type="text/css"/>
+    <!--必要样式-->
+    <link href="__INDEX__/css/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="__INDEX__/css/demo.css" rel="stylesheet" type="text/css"/>
+    <link href="__INDEX__/css/loaders.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-	<!-- 雪花背景 -->
-	<div class="snow-container"></div>
-	<!-- 登录控件 -->
-	<div id="login">
-		<input id="tab-1" type="radio" name="tab" class="sign-in hidden" checked />
-		<input id="tab-2" type="radio" name="tab" class="sign-up hidden" />
-		<input id="tab-3" type="radio" name="tab" class="sign-out hidden" />
-		<div class="wrapper">
-			<!-- 登录页面 -->
-			<div class="login sign-in-htm">
-				<form class="container offset1 loginform">
-					<!-- 猫头鹰控件 -->
-					<div id="owl-login" class="login-owl">
-						<div class="hand"></div>
-						<div class="hand hand-r"></div>
-						<div class="arms">
-							<div class="arm"></div>
-							<div class="arm arm-r"></div>
-						</div>
-					</div>
-					<div class="pad input-container">
-						<section class="content">
-							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="text" id="login-username" 
-									autocomplete="off" placeholder="请输入用户名" tabindex="1" maxlength="15" />
-								<label class="input__label input__label--hideo" for="login-username">
-									<i class="fa fa-fw fa-user icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
-							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="password" id="login-password" placeholder="请输入密码" tabindex="2" maxlength="15"/>
-								<label class="input__label input__label--hideo" for="login-password">
-									<i class="fa fa-fw fa-lock icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
-							<span class="input input--hideo input--verify_code">
-								<input class="input__field input__field--hideo" type="text" id="login-verify-code" 
-									autocomplete="off" placeholder="请输入验证码" tabindex="3" maxlength="4" />								
-								<label class="input__label input__label--hideo" for="login-verify-code">
-									<i class="fa fa-fw fa-bell-o icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>								
-							</span>
-							<canvas class="verify-code-canvas" id="login-verify-code-canvas"></canvas>
-						</section>
-					</div>
-					<div class="form-actions">
-						<a tabindex="4" class="btn pull-left btn-link text-muted" onclick="goto_forget()">忘记密码?</a>
-						<a tabindex="5" class="btn btn-link text-muted" onclick="goto_register()">注册</a>
-						<input class="btn btn-primary" type="button" tabindex="3" onclick="login()" value="登录" 
-							style="color:white;"/>
-					</div>
-				</form>
-			</div>
-			<!-- 忘记密码页面 -->
-			<div class="login sign-out-htm">
-				<form action="#" method="post" class="container offset1 loginform">
-					<!-- 猫头鹰控件 -->
-					<div id="owl-login" class="forget-owl">
-						<div class="hand"></div>
-						<div class="hand hand-r"></div>
-						<div class="arms">
-							<div class="arm"></div>
-							<div class="arm arm-r"></div>
-						</div>
-					</div>
-					<div class="pad input-container">
-						<section class="content">
-							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="text" id="forget-username" autocomplete="off" placeholder="请输入用户名"/>
-								<label class="input__label input__label--hideo" for="forget-username">
-									<i class="fa fa-fw fa-user icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
-							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="text" id="forget-code" autocomplete="off" placeholder="请输入注册码"/>
-								<label class="input__label input__label--hideo" for="forget-code">
-									<i class="fa fa-fw fa-wifi icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
-							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="password" id="forget-password" placeholder="请重置密码" />
-								<label class="input__label input__label--hideo" for="forget-password">
-									<i class="fa fa-fw fa-lock icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
-						</section>
-					</div>
-					<div class="form-actions">
-						<a class="btn pull-left btn-link text-muted" onclick="goto_login()">返回登录</a>
-						<input class="btn btn-primary" type="button" onclick="forget()" value="重置密码" 
-							style="color:white;"/>
-					</div>
-				</form>
-			</div>
-			<!-- 注册页面 -->
-			<div class="login sign-up-htm">
-				<form action="#" method="post" class="container offset1 loginform">
-					<!-- 猫头鹰控件 -->
-					<div id="owl-login" class="register-owl">
-						<div class="hand"></div>
-						<div class="hand hand-r"></div>
-						<div class="arms">
-							<div class="arm"></div>
-							<div class="arm arm-r"></div>
-						</div>
-					</div>
-					<div class="pad input-container">
-						<section class="content">
-							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="text" id="register-username" 
-									autocomplete="off" placeholder="请输入用户名" maxlength="15"/>
-								<label class="input__label input__label--hideo" for="register-username">
-									<i class="fa fa-fw fa-user icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
-							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="password" id="register-password" placeholder="请输入密码" maxlength="15"/>
-								<label class="input__label input__label--hideo" for="register-password">
-									<i class="fa fa-fw fa-lock icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
-							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="password" id="register-repassword" placeholder="请确认密码" maxlength="15"/>
-								<label class="input__label input__label--hideo" for="register-repassword">
-									<i class="fa fa-fw fa-lock icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
-							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="text" id="register-code" autocomplete="off" placeholder="请输入注册码"/>
-								<label class="input__label input__label--hideo" for="register-code">
-									<i class="fa fa-fw fa-wifi icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
-						</section>
-					</div>
-					<div class="form-actions">
-						<a class="btn pull-left btn-link text-muted" onclick="goto_login()">返回登录</a>
-						<input class="btn btn-primary" type="button" onclick="register()" value="注册" 
-							style="color:white;"/>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+<div class='login'>
+    <div class='login_title'>
+        <span>管理员登录</span>
+    </div>
+    <div class='login_fields'>
+        <div class='login_fields__user'>
+            <div class='icon'>
+                <img alt="" src='__INDEX__/img/user_icon_copy.png'>
+            </div>
+            <input name="login" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value="kbcxy"/>
+            <div class='validation'>
+                <img alt="" src='__INDEX__/img/tick.png'>
+            </div>
+        </div>
+        <div class='login_fields__password'>
+            <div class='icon'>
+                <img alt="" src='__INDEX__/img/lock_icon_copy.png'>
+            </div>
+            <input name="pwd" placeholder='密码' maxlength="16" type='text' autocomplete="off">
+            <div class='validation'>
+                <img alt="" src='__INDEX__/img/tick.png'>
+            </div>
+        </div>
+        <div class='login_fields__password'>
+            <div class='icon'>
+                <img alt="" src='__INDEX__/img/key.png'>
+            </div>
+            <input name="code" placeholder='验证码' maxlength="4" type='text' name="ValidateNum" autocomplete="off">
+            <div class='validation' style="opacity: 1; right: -5px;top: -3px;">
+                <canvas class="J_codeimg" id="myCanvas" onclick="Code();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+            </div>
+        </div>
+        <div class='login_fields__submit'>
+            <input type='button' value='登录'>
+        </div>
+    </div>
+    <div class='success'>
+    </div>
+    <div class='disclaimer'>
+        <p>欢迎登陆后台管理系统</p>
+    </div>
+</div>
+<div class='authent'>
+    <div class="loader" style="height: 44px;width: 44px;margin-left: 28px;">
+        <div class="loader-inner ball-clip-rotate-multiple">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <p>认证中...</p>
+</div>
+<div class="OverWindows"></div>
+<link href="__INDEX__/layui/css/layui.css" rel="stylesheet" type="text/css"/>
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="__INDEX__/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src='__INDEX__/js/stopExecutionOnTimeout.js?t=1'></script>
+<script src="__INDEX__/layui/layui.js" type="text/javascript"></script>
+<script src="__INDEX__/js/Particleground.js" type="text/javascript"></script>
+<script src="__INDEX__/js/Treatment.js" type="text/javascript"></script>
+<script src="__INDEX__/js/jquery.mockjax.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var canGetCookie = 0;//是否支持存储Cookie 0 不支持 1 支持
+    var ajaxmockjax = 1;//是否启用虚拟Ajax的请求响 0 不启用  1 启用
+    //默认账号密码
+
+    var truelogin = "kbcxy";
+    var truepwd = "mcwjs";
+
+    var CodeVal = 0;
+    Code();
+
+    function Code() {
+        if (canGetCookie == 1) {
+            createCode("AdminCode");
+            var AdminCode = getCookieValue("AdminCode");
+            showCheck(AdminCode);
+        } else {
+            showCheck(createCode(""));
+        }
+    }
+
+    function showCheck(a) {
+        CodeVal = a;
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        ctx.clearRect(0, 0, 1000, 1000);
+        ctx.font = "80px 'Hiragino Sans GB'";
+        ctx.fillStyle = "#E8DFE8";
+        ctx.fillText(a, 0, 100);
+    }
+
+    $(document).keypress(function (e) {
+        // 回车键事件
+        if (e.which == 13) {
+            $('input[type="button"]').click();
+        }
+    });
+    //粒子背景特效
+    $('body').particleground({
+        dotColor: '#E8DFE8',
+        lineColor: '#133b88'
+    });
+    $('input[name="pwd"]').focus(function () {
+        $(this).attr('type', 'password');
+    });
+    $('input[type="text"]').focus(function () {
+        $(this).prev().animate({'opacity': '1'}, 200);
+    });
+    $('input[type="text"],input[type="password"]').blur(function () {
+        $(this).prev().animate({'opacity': '.5'}, 200);
+    });
+    $('input[name="login"],input[name="pwd"]').keyup(function () {
+        var Len = $(this).val().length;
+        if (!$(this).val() == '' && Len >= 5) {
+            $(this).next().animate({
+                'opacity': '1',
+                'right': '30'
+            }, 200);
+        } else {
+            $(this).next().animate({
+                'opacity': '0',
+                'right': '20'
+            }, 200);
+        }
+    });
+    var open = 0;
+    layui.use('layer', function () {
+        var msgalert = '默认账号:' + truelogin + '<br/> 默认密码:' + truepwd;
+        var index = layer.alert(msgalert, {
+            icon: 6,
+            time: 4000,
+            offset: 't',
+            closeBtn: 0,
+            title: '友情提示',
+            btn: [],
+            anim: 2,
+            shade: 0
+        });
+        layer.style(index, {
+            color: '#777'
+        });
+        //非空验证
+        $('input[type="button"]').click(function () {
+            var login = $('input[name="login"]').val();
+            var pwd = $('input[name="pwd"]').val();
+            var code = $('input[name="code"]').val();
+            if (login == '') {
+                ErroAlert('请输入您的账号');
+            } else if (pwd == '') {
+                ErroAlert('请输入密码');
+            } else if (code == '' || code.length != 4) {
+                ErroAlert('输入验证码');
+            } else {
+                //认证中..
+                fullscreen();
+                $('.login').addClass('test'); //倾斜特效
+                setTimeout(function () {
+                    $('.login').addClass('testtwo'); //平移特效
+                }, 300);
+                setTimeout(function () {
+                    $('.authent').show().animate({right: -320}, {
+                        easing: 'easeOutQuint',
+                        duration: 600,
+                        queue: false
+                    });
+                    $('.authent').animate({opacity: 1}, {
+                        duration: 200,
+                        queue: false
+                    }).addClass('visible');
+                }, 500);
+
+                //登陆
+                var JsonData = {login: login, pwd: pwd, code: code};
+                //此处做为ajax内部判断
+                var url = "";
+                if (JsonData.login == truelogin && JsonData.pwd == truepwd && JsonData.code.toUpperCase() == CodeVal.toUpperCase()) {
+                    url = "Ajax/Login";
+                } else {
+                    url = "Ajax/LoginFalse";
+                }
+
+
+                AjaxPost(url, JsonData,
+                    function () {
+                        //ajax加载中
+                    },
+                    function (data) {
+                        //ajax返回
+                        //认证完成
+                        setTimeout(function () {
+                            $('.authent').show().animate({right: 90}, {
+                                easing: 'easeOutQuint',
+                                duration: 600,
+                                queue: false
+                            });
+                            $('.authent').animate({opacity: 0}, {
+                                duration: 200,
+                                queue: false
+                            }).addClass('visible');
+                            $('.login').removeClass('testtwo'); //平移特效
+                        }, 2000);
+                        setTimeout(function () {
+                            $('.authent').hide();
+                            $('.login').removeClass('test');
+                            if (data.Status == 'ok') {
+                                //登录成功
+                                $('.login div').fadeOut(100);
+                                $('.success').fadeIn(1000);
+                                $('.success').html(data.Text);
+                                //跳转操作
+
+                            } else {
+                                AjaxErro(data);
+                            }
+                        }, 2400);
+                    })
+            }
+        })
+    })
+    var fullscreen = function () {
+        elem = document.body;
+        if (elem.webkitRequestFullScreen) {
+            elem.webkitRequestFullScreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.requestFullScreen) {
+            elem.requestFullscreen();
+        } else {
+            //浏览器不支持全屏API或已被禁用
+        }
+    }
+    if (ajaxmockjax == 1) {
+        $.mockjax({
+            url: 'Ajax/Login',
+            status: 200,
+            responseTime: 50,
+            responseText: {"Status": "ok", "Text": "登陆成功<br /><br />欢迎回来"}
+        });
+        $.mockjax({
+            url: 'Ajax/LoginFalse',
+            status: 200,
+            responseTime: 50,
+            responseText: {"Status": "Erro", "Erro": "账号名或密码或验证码有误"}
+        });
+    }
+</script>
 </body>
 </html>
