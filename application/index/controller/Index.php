@@ -13,7 +13,14 @@ class Index extends Controller
     public function index()
     {
         //加载页面
-        return $this->fetch();
+        return "前台首页";
 
     }
+
+    public function test()
+    {
+        return json("ajax成功！");
+    }
+
+
 }
