@@ -19,16 +19,21 @@
 
     <style type="text/css">
         #line-chart {
-            height:300px;
-            width:800px;
+            height: 300px;
+            width: 800px;
             margin: 0px auto;
             margin-top: 1em;
         }
-        .brand { font-family: georgia, serif; }
+
+        .brand {
+            font-family: georgia, serif;
+        }
+
         .brand .first {
             color: #ccc;
             font-style: italic;
         }
+
         .brand .second {
             color: #fff;
             font-weight: bold;
@@ -48,10 +53,14 @@
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 </head>
 
-<!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
-<!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
-<!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
-<!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
+<!--[if lt IE 7 ]>
+<body class="ie ie6"> <![endif]-->
+<!--[if IE 7 ]>
+<body class="ie ie7 "> <![endif]-->
+<!--[if IE 8 ]>
+<body class="ie ie8 "> <![endif]-->
+<!--[if IE 9 ]>
+<body class="ie ie9 "> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <body class="">
 <!--<![endif]-->
@@ -77,48 +86,50 @@
             </li>
 
         </ul>
-        <a class="brand" href="index.html"><span class="first">大学生电气信息实践创新中心</span> <span class="second">后台管理系统</span></a>
+        <a class="brand" href="index.html"><span class="first">大学生电气信息实践创新中心</span> <span
+                class="second">后台管理系统</span></a>
     </div>
 </div>
 
 
-
-<div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
+<div class="copyrights">Collect from <a href="http://www.cssmoban.com/" title="网站模板">网站模板</a></div>
 <div class="sidebar-nav">
     <form class="search form-inline">
         <input type="text" placeholder="Search...">
     </form>
-    <a href="{:url('index/system')}" class="nav-header" ><i class="icon-cog"></i>系统信息</a>
-    <a href="person.html" class="nav-header" ><i class="icon-question-sign"></i>个人信息</a>
+    <a href="{:url('index/system')}" class="nav-header"><i class="icon-cog"></i>系统信息</a>
+    <a href="person.html" class="nav-header"><i class="icon-question-sign"></i>个人信息</a>
     <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>NO</a>
     <ul id="dashboard-menu" class="nav nav-list collapse in">
         <li><a href="{:url('index/index')}">hello</a></li>
-        <li ><a href="users.html">Sample List</a></li>
-        <li ><a href="user.html">Sample Item</a></li>
-        <li ><a href="media.html">Media</a></li>
-        <li ><a href="calendar.html">Calendar</a></li>
+        <li><a href="users.html">Sample List</a></li>
+        <li><a href="user.html">Sample Item</a></li>
+        <li><a href="media.html">Media</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
 
     </ul>
 
-    <a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>权限管理<span class="label label-info">+3</span></a>
+    <a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>权限管理<span
+            class="label label-info">+3</span></a>
     <ul id="accounts-menu" class="nav nav-list collapse">
-        <li ><a href="{:url('manager/add')}">添加管理员</a></li>
-        <li ><a href="{:url('manager/index')}">管理员列表</a></li>
-        <li ><a href="{:url('manager/log')}">登录日志列表</a></li>
+        <li><a href="{:url('manager/add')}">添加管理员</a></li>
+        <li><a href="{:url('manager/index')}">管理员列表</a></li>
+        <li><a href="{:url('manager/log')}">登录日志列表</a></li>
     </ul>
 
-    <a href="#error-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-exclamation-sign"></i>文件上传<i class="icon-chevron-up"></i></a>
+    <a href="#error-menu" class="nav-header collapsed" data-toggle="collapse"><i
+            class="icon-exclamation-sign"></i>文件上传<i class="icon-chevron-up"></i></a>
     <ul id="error-menu" class="nav nav-list collapse">
-        <li ><a href="403.html">403 page</a></li>
-        <li ><a href="404.html">404 page</a></li>
-        <li ><a href="500.html">500 page</a></li>
-        <li ><a href="503.html">503 page</a></li>
+        <li><a href="403.html">403 page</a></li>
+        <li><a href="404.html">404 page</a></li>
+        <li><a href="500.html">500 page</a></li>
+        <li><a href="503.html">503 page</a></li>
     </ul>
 
     <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Legal</a>
     <ul id="legal-menu" class="nav nav-list collapse">
-        <li ><a href="privacy-policy.html">Privacy Policy</a></li>
-        <li ><a href="terms-and-conditions.html">Terms and Conditions</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
     </ul>
 
 </div>
@@ -126,20 +137,21 @@
 
 <!--内容页-->
 <div class="content">
-            {__CONTENT__}
-            <footer>
-                <hr style="overflow: hidden;">
-                <p>&copy; 2018 <a href="http://eipic.cn" target="_blank">大学生电气信息实践创新中心</a></p>
-            </footer>
+    {__CONTENT__}
+    <footer>
+        <hr style="overflow: hidden;">
+        <p>&copy; 2018 <a href="http://eipic.cn" target="_blank">大学生电气信息实践创新中心</a></p>
+    </footer>
 </div>
-
 
 
 <script src="__ADMIN__/lib/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
     $("[rel=tooltip]").tooltip();
-    $(function() {
-        $('.demo-cancel-click').click(function(){return false;});
+    $(function () {
+        $('.demo-cancel-click').click(function () {
+            return false;
+        });
     });
 </script>
 

@@ -17,14 +17,14 @@ class Commom extends Controller
     {
         parent::_initialize(); // 继承父类的初始化方法
         //登录验证  这里加一个loginid
-        if(!session('loginname','','admin')){
-            $controller=$this->request->controller();
-            $action=$this->request->action();
-            if($controller==='Index'&&$action==='index'){
+        if (!session('loginname', '', 'admin')) {
+            $controller = $this->request->controller();
+            $action = $this->request->action();
+            if ($controller === 'Index' && $action === 'index') {
                 $this->redirect('login/index');
             }
-            $this->error('未登录不允许访问','login/index');
+            $this->error('未登录不允许访问', 'login/index');
         }
-        $this->assign('admin',session('loginname','','admin'));
+        $this->assign('admin', session('loginname', '', 'admin'));
     }
 }

@@ -1,35 +1,37 @@
 <!doctype html>
 <html lang="zh">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <title>学分管理系统</title>
-  <link href="__ADMIN__/assets/css/bootstrap.css" rel="stylesheet">
-  <link href="__ADMIN__/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <link href="__ADMIN__/assets/css/style.css" rel="stylesheet">
-  <link href="__ADMIN__/assets/css/style-responsive.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title>学分管理系统</title>
+    <link href="__ADMIN__/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="__ADMIN__/assets/css/style.css" rel="stylesheet">
+    <link href="__ADMIN__/assets/css/style-responsive.css" rel="stylesheet">
 </head>
 <body>
 
 <div id="login-page">
-  <div class="container">
+    <div class="container">
 
-    <form class="form-login" action="" method="post" id="loginForm">
-      <h2 class="form-login-heading">创新中心后台登录系统</h2>
-      <div class="login-wrap" style="position: relative">
-        <input type="text" class="form-control" name="aid" id="aid" value="admin" placeholder="用户帐号。。。">
-        <br>
-        <input type="password" class="form-control" name="password" id="password" value="12345678"  placeholder="用户密码。。。">
-          <input type="text" class="form-control" name="code" id="code" placeholder="请输入验证码" style="width: 120px; margin-top: 20px;">
+        <form class="form-login" action="" method="post" id="loginForm">
+            <h2 class="form-login-heading">创新中心后台登录系统</h2>
+            <div class="login-wrap" style="position: relative">
+                <input type="text" class="form-control" name="aid" id="aid" value="admin" placeholder="用户帐号。。。">
+                <br>
+                <input type="password" class="form-control" name="password" id="password" value="12345678"
+                       placeholder="用户密码。。。">
+                <input type="text" class="form-control" name="code" id="code" placeholder="请输入验证码"
+                       style="width: 120px; margin-top: 20px;">
 
-        <div class="code">
-          <img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}?'+Math.random();" >
-        </div>
-        <input class="btn btn-theme btn-block" type="submit" value="登录"/>
-      </div>
-    </form>
-  </div>
+                <div class="code">
+                    <img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}?'+Math.random();">
+                </div>
+                <input class="btn btn-theme btn-block" type="submit" value="登录"/>
+            </div>
+        </form>
+    </div>
 </div>
 <script type="text/javascript" src="__ADMIN__/assets/js/jquery.js"></script>
 <script type="text/javascript" src="__ADMIN__/assets/js/bootstrap.min.js"></script>
@@ -37,6 +39,7 @@
 <script type="text/javascript" src="__ADMIN__/validate/login.js"></script>
 <script>
     $.backstretch("__ADMIN__/assets/img/login-bg.jpg", {speed: 500});
+
 </script>
 </body>
 </html>

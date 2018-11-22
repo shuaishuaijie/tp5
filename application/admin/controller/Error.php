@@ -9,17 +9,22 @@
 
 
 namespace app\admin\controller;
+
 //声明控制器
 
 use think\Controller;
 
-class Error extends Controller{
+class Error extends Controller
+{
     //空控制器
-    public function index(){
+    public function index()
+    {
         $this->redirect('/admin/index');
     }
+
     //空方法
-    public function _empty(){
+    public function _empty()
+    {
         $this->redirect('/admin/index');
     }
 }

@@ -12,12 +12,12 @@
     <script src="__ADMIN__/js/jquery.min.js"></script>
     <script src="__ADMIN__/js/bootstrap.min.js"></script>
     <script>
-        $(function() {
-            $(".meun-item").click(function() {
+        $(function () {
+            $(".meun-item").click(function () {
                 $(".meun-item").removeClass("meun-item-active");
                 $(this).addClass("meun-item-active");
                 var itmeObj = $(".meun-item").find("img");
-                itmeObj.each(function() {
+                itmeObj.each(function () {
                     var items = $(this).attr("src");
                     items = items.replace("_grey.png", ".png");
                     items = items.replace(".png", "_grey.png")
@@ -28,19 +28,19 @@
                 attrObj = attrObj.replace("_grey.png", ".png");
                 $(this).find("img").attr("src", attrObj);
             });
-            $("#topAD").click(function() {
+            $("#topAD").click(function () {
                 $("#topA").toggleClass(" glyphicon-triangle-right");
                 $("#topA").toggleClass(" glyphicon-triangle-bottom");
             });
-            $("#topBD").click(function() {
+            $("#topBD").click(function () {
                 $("#topB").toggleClass(" glyphicon-triangle-right");
                 $("#topB").toggleClass(" glyphicon-triangle-bottom");
             });
-            $("#topCD").click(function() {
+            $("#topCD").click(function () {
                 $("#topC").toggleClass(" glyphicon-triangle-right");
                 $("#topC").toggleClass(" glyphicon-triangle-bottom");
             });
-            $(".toggle-btn").click(function() {
+            $(".toggle-btn").click(function () {
                 $("#leftMeun").toggleClass("show");
                 $("#rightContent").toggleClass("pd0px");
             })
@@ -51,10 +51,10 @@
     <script src="__ADMIN__/js/respond.min.js"></script>
     <![endif]-->
     <link href="__ADMIN__css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="__ADMIN__/css/common.css" />
-    <link rel="stylesheet" type="text/css" href="__ADMIN__/css/slide.css" />
-    <link rel="stylesheet" type="text/css" href="__ADMIN__/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="__ADMIN__/css/flat-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="__ADMIN__/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__ADMIN__/css/slide.css"/>
+    <link rel="stylesheet" type="text/css" href="__ADMIN__/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__ADMIN__/css/flat-ui.min.css"/>
     <link rel="stylesheet" type="text/css" href="__ADMIN__/css/jquery.nouislider.css">
 </head>
 
@@ -73,124 +73,140 @@
             </p>
         </div>
         <div class="meun-title">账号管理</div>
-        <div class="meun-item meun-item-active" href="#sour" aria-controls="sour" role="tab" data-toggle="tab"><img src="images/icon_source.png">资源管理</div>
-        <div class="meun-item" href="#char" aria-controls="char" role="tab" data-toggle="tab"><img src="__ADMIN__/images/icon_chara_grey.png">权限管理</div>
-        <div class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img src="__ADMIN__/images/icon_user_grey.png">用户管理</div>
-        <div class="meun-item" href="#chan" aria-controls="chan" role="tab" data-toggle="tab"><img src="__ADMIN__/images/icon_change_grey.png">修改密码</div>
+        <div class="meun-item meun-item-active" href="#sour" aria-controls="sour" role="tab" data-toggle="tab"><img
+                src="images/icon_source.png">资源管理
+        </div>
+        <div class="meun-item" href="#char" aria-controls="char" role="tab" data-toggle="tab"><img
+                src="__ADMIN__/images/icon_chara_grey.png">权限管理
+        </div>
+        <div class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img
+                src="__ADMIN__/images/icon_user_grey.png">用户管理
+        </div>
+        <div class="meun-item" href="#chan" aria-controls="chan" role="tab" data-toggle="tab"><img
+                src="__ADMIN__/images/icon_change_grey.png">修改密码
+        </div>
         <div class="meun-title">地区管理</div>
-        <div class="meun-item" href="#scho" aria-controls="scho" role="tab" data-toggle="tab"><img src="__ADMIN__/images/icon_house_grey.png">地区管理</div>
-        <div class="meun-item" href="#regu" aria-controls="regu" role="tab" data-toggle="tab"><img src="__ADMIN__/images/icon_rule_grey.png">规则管理</div>
-        <div class="meun-item" href="#stud" aria-controls="stud" role="tab" data-toggle="tab"><img src="__ADMIN__/images/icon_card_grey.png">人员信息</div>
-        <div class="meun-item" href="#sitt" aria-controls="sitt" role="tab" data-toggle="tab"><img src="__ADMIN__/images/icon_char_grey.png">座位管理</div>
+        <div class="meun-item" href="#scho" aria-controls="scho" role="tab" data-toggle="tab"><img
+                src="__ADMIN__/images/icon_house_grey.png">地区管理
+        </div>
+        <div class="meun-item" href="#regu" aria-controls="regu" role="tab" data-toggle="tab"><img
+                src="__ADMIN__/images/icon_rule_grey.png">规则管理
+        </div>
+        <div class="meun-item" href="#stud" aria-controls="stud" role="tab" data-toggle="tab"><img
+                src="__ADMIN__/images/icon_card_grey.png">人员信息
+        </div>
+        <div class="meun-item" href="#sitt" aria-controls="sitt" role="tab" data-toggle="tab"><img
+                src="__ADMIN__/images/icon_char_grey.png">座位管理
+        </div>
     </div>
 
 
+    <!--用户管理模块-->
+    <div role="tabpanel" class="tab-pane" id="user">
+        <div class="check-div form-inline">
+            <div class="col-xs-3">
+                <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addUser">添加用户</button>
+            </div>
+            <div class="col-xs-4">
+                <input type="text" class="form-control input-sm" placeholder="输入文字搜索">
+                <button class="btn btn-white btn-xs ">查 询</button>
+            </div>
+            <div class="col-lg-3 col-lg-offset-2 col-xs-4" style=" padding-right: 40px;text-align: right;">
+                <label for="paixu">排序:&nbsp;</label>
+                <select class=" form-control">
+                    <option>地区</option>
+                    <option>地区</option>
+                    <option>班期</option>
+                    <option>性别</option>
+                    <option>年龄</option>
+                    <option>份数</option>
+                </select>
+            </div>
+        </div>
+        <div class="data-div">
+            <div class="row tableHeader">
+                <div class="col-xs-2 ">
+                    用户名
+                </div>
+                <div class="col-xs-2">
+                    地区
+                </div>
+                <div class="col-xs-2">
+                    真实姓名
+                </div>
+                <div class="col-xs-2">
+                    电话
+                </div>
+                <div class="col-xs-2">
+                    状态
+                </div>
+                <div class="col-xs-2">
+                    操作
+                </div>
+            </div>
+            <div class="tablebody">
 
-            <!--用户管理模块-->
-            <div role="tabpanel" class="tab-pane" id="user">
-                <div class="check-div form-inline">
-                    <div class="col-xs-3">
-                        <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addUser">添加用户 </button>
+                <div class="row">
+                    <div class="col-xs-2 ">
+                        goodmoning
                     </div>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control input-sm" placeholder="输入文字搜索">
-                        <button class="btn btn-white btn-xs ">查 询 </button>
+                    <div class="col-xs-2">
+                        国际关系地区
                     </div>
-                    <div class="col-lg-3 col-lg-offset-2 col-xs-4" style=" padding-right: 40px;text-align: right;">
-                        <label for="paixu">排序:&nbsp;</label>
-                        <select class=" form-control">
-                            <option>地区</option>
-                            <option>地区</option>
-                            <option>班期</option>
-                            <option>性别</option>
-                            <option>年龄</option>
-                            <option>份数</option>
-                        </select>
+                    <div class="col-xs-2">
+                        李豆豆
+                    </div>
+                    <div class="col-xs-2">
+                        13688889999
+                    </div>
+                    <div class="col-xs-2">
+                        状态
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviseUser">修改</button>
+                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteUser">删除</button>
                     </div>
                 </div>
-                <div class="data-div">
-                    <div class="row tableHeader">
-                        <div class="col-xs-2 ">
-                            用户名
-                        </div>
-                        <div class="col-xs-2">
-                            地区
-                        </div>
-                        <div class="col-xs-2">
-                            真实姓名
-                        </div>
-                        <div class="col-xs-2">
-                            电话
-                        </div>
-                        <div class="col-xs-2">
-                            状态
-                        </div>
-                        <div class="col-xs-2">
-                            操作
-                        </div>
-                    </div>
-                    <div class="tablebody">
 
-                        <div class="row">
-                            <div class="col-xs-2 ">
-                                goodmoning
-                            </div>
-                            <div class="col-xs-2">
-                                国际关系地区
-                            </div>
-                            <div class="col-xs-2">
-                                李豆豆
-                            </div>
-                            <div class="col-xs-2">
-                                13688889999
-                            </div>
-                            <div class="col-xs-2">
-                                状态
-                            </div>
-                            <div class="col-xs-2">
-                                <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviseUser">修改</button>
-                                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteUser">删除</button>
-                            </div>
-                        </div>
+            </div>
 
-                    </div>
+        </div>
 
-                </div>
+        <script src="__ADMIN__/js/jquery.nouislider.js"></script>
 
-<script src="__ADMIN__/js/jquery.nouislider.js"></script>
-
-<!-- this page specific inline scripts -->
-<script>
-    //min/max slider
-    function huadong(my, unit, def, max) {
-        $(my).noUiSlider({
-            range: [0, max],
-            start: [def],
-            handles: 1,
-            connect: 'upper',
-            slide: function() {
-                var val = Math.floor($(this).val());
-                $(this).find(".noUi-handle").text(
-                    val + unit
-                );
-                console.log($(this).find(".noUi-handle").parent().parent().html());
-            },
-            set: function() {
-                var val = Math.floor($(this).val());
-                $(this).find(".noUi-handle").text(
-                    val + unit
-                );
+        <!-- this page specific inline scripts -->
+        <script>
+            //min/max slider
+            function huadong(my, unit, def, max) {
+                $(my).noUiSlider({
+                    range: [0, max],
+                    start: [def],
+                    handles: 1,
+                    connect: 'upper',
+                    slide: function () {
+                        var val = Math.floor($(this).val());
+                        $(this).find(".noUi-handle").text(
+                            val + unit
+                        );
+                        console.log($(this).find(".noUi-handle").parent().parent().html());
+                    },
+                    set: function () {
+                        var val = Math.floor($(this).val());
+                        $(this).find(".noUi-handle").text(
+                            val + unit
+                        );
+                    }
+                });
+                $(my).val(def, true);
             }
-        });
-        $(my).val(def, true);
-    }
-    huadong('.slider-minmax1', "分钟", "5", 30);
-    huadong('.slider-minmax2', "分钟", "6", 15);
-    huadong('.slider-minmax3', "分钟", "10", 60);
-    huadong('.slider-minmax4', "次", "2", 10);
-    huadong('.slider-minmax5', "天", "3", 7);
-    huadong('.slider-minmax6', "天", "8", 10);
-</script>
+
+            huadong('.slider-minmax1', "分钟", "5", 30);
+            huadong('.slider-minmax2', "分钟", "6", 15);
+            huadong('.slider-minmax3', "分钟", "10", 60);
+            huadong('.slider-minmax4', "次", "2", 10);
+            huadong('.slider-minmax5', "天", "3", 7);
+            huadong('.slider-minmax6', "天", "8", 10);
+        </script>
 </body>
 
 </html>

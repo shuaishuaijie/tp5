@@ -23,9 +23,9 @@
             </tr>
             {volist name="log" id="vo"}
             <tr>
-                <td >{$vo.logintime|date="Y/m/d H:i:s",###}</td>
-                <td >{$vo.ip}</td>
-                <td >{$vo.loginmsg}</td>
+                <td>{$vo.logintime|date="Y/m/d H:i:s",###}</td>
+                <td>{$vo.ip}</td>
+                <td>{$vo.loginmsg}</td>
             </tr>
             {/volist}
         </table>
