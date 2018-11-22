@@ -12,8 +12,8 @@ class Index extends Controller
      */
     public function index()
     {
-//        //加载页面
-//        return $this->fetch();
-        echo "这是前台模块";
+        //加载页面
+        return $this->fetch();
+
     }
 }
