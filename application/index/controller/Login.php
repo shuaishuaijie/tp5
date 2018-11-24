@@ -10,6 +10,7 @@ namespace app\index\controller;
 
 
 use think\Controller;
+use think\Request;
 
 class Login extends Controller
 {
@@ -19,30 +20,25 @@ class Login extends Controller
     public function index()
     {
         if (request()->isPost()) {
-
-            $data = input('post');
-            $result = json_decode($data);
-            unset($result['code']);
-            $res = db('user')->where('login', $result['login'])->find();
-
-            $responseText = ["Status" => "ok", "Text" => "登录成功"];
-            //$responseText = ["Status"=> "error", "Text"=>"账号或密码错误请重新登录"];
+            $data = request()->post();
+            unset($data['code']);
+            $res = db('user')->where('account', $data['login'])->find();
+            if (!$res) {
+                $responseText = ["Status" => "error", "Text" => "账号或密码错误请重新登录"];
+            } else {
+                if ($res['password'] != md5($data['pwd'])) {
+                    $responseText = ["Status" => "error", "Text" => "账号或密码错误请重新登录"];
+                } else {
+                    $responseText = ["Status" => "ok", "Text" => "登录成功"];
+                }
+            }
             return json($responseText);
         }
         return $this->fetch();
     }
 
-    //
     public function test()
     {
-        $data = [
-            "account"=> 2016301020213,
-            "password"=> 123456,
-            "name"=> "杰哥",
-            "clas" => 1,
-            "score"=> null,
-            "photo" => null,
-        ];
-        db('user')->insert($data);
+        
     }
 }
